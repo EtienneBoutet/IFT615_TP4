@@ -40,10 +40,10 @@ class Probabilite():
         self.vocabulaire = []
 
     def probClasse(self, C):
-        return self.nbDocsParClasse[C] / sum(self.nbDocsParClasse.values())
+        return self.nbDocsParClasse[C] / (self.nbDocsParClasse[0] + self.nbDocsParClasse[1])
 
     def probMotEtantDonneClasse(self, C, W, delta):
-        return (delta + self.freqWC[(W, C)]) / ((delta * (len(self.vocabulaire) + 1)) + self.nbDocsParClasse[C])
+        return (delta + self.freqWC[(W, C)]) / ((delta * (len(self.vocabulaire) + 1)) + self.nbMotsParClasse[C])
 
     def __call__(self, C, W=None, delta=None):
         if W is None:
@@ -137,5 +137,17 @@ def entrainer(corpus, P):
 #         d'un document D=[w_1,...,w_d] et de catégorie c, i.e. P(C=c,D=[w_1,...,w_d]). *N'oubliez pas vos logarithmes!
 #
 def predire(doc, P, C, delta):
-    #TODO: .~= À COMPLÉTER =~.
-    return 1, 0.0
+    base_class = None
+    base_log_prob = float("-inf")
+
+    for c in C:
+        value = 0.0
+        for word in doc:
+            value += math.log(P.probMotEtantDonneClasse(c, word, delta))
+
+        candidate = math.log(P.probClasse(c)) + value
+        if candidate > base_log_prob:
+            base_class = c
+            base_log_prob = candidate
+
+    return base_class, base_log_prob
