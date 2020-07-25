@@ -79,7 +79,6 @@ def creerVocabulaire(documents, seuil):
     return voc_words
 
 
-
 # pretraiter: Fonction qui remplace les mots qui ne font pas parti du vocabulaire
 #             par le token 'OOV'.
 #
@@ -90,8 +89,14 @@ def creerVocabulaire(documents, seuil):
 # retour: Une 'list' des mots contenu dans le document et présent dans le vocabulaire.
 #
 def pretraiter(doc, V):
-    #TODO: .~= À COMPLÉTER =~.
-    return doc.split()
+    lst = []
+    for word in doc.split():
+        if word not in V:
+            lst.append('OOV')
+        else:
+            lst.append(word)
+
+    return lst
 
 
 # entrainer: Fonction permettant d'entraîner les distributions P(C) et P(W|C)
