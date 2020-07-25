@@ -46,7 +46,7 @@ class ReseauDeNeurones:
 
         delta_output = y - y_hat
 
-        delta_hidden = np.zeros((10, ))
+        delta_hidden = np.zeros((a.shape[0], ))
         for idx, node in enumerate(a):
             delta_hidden[idx] = node * (1.0 - node) * self.w[idx] * delta_output     
 
