@@ -112,9 +112,14 @@ def pretraiter(doc, V):
 # retour: Rien! L'objet P doit être modifié via ses dictionnaires.
 #
 def entrainer(corpus, P):
-    #TODO: .~= À COMPLÉTER =~.
-    pass
+    for tupl in corpus:
+        words, c = tupl 
 
+        P.nbMotsParClasse[c] += len(words)
+        P.nbDocsParClasse[c] += 1
+        
+        for word in words:
+            P.freqWC[(word, c)] += 1
 
 # predire: Fonction utilisée pour trouver la classe la plus probable à quelle
 #          appartient le document d à partir des distribution P(C) et P(W|C).
