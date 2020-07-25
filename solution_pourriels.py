@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 #####
-# VotreNom (VotreMatricule) .~= À MODIFIER =~.
+# Étienne Boutet - boue2327
+# Raphael Valois - valr2802
 ###
 
 from pdb import set_trace as dbg  # Utiliser dbg() pour faire un break dans votre code.
@@ -39,12 +40,10 @@ class Probabilite():
         self.vocabulaire = []
 
     def probClasse(self, C):
-        #TODO: .~= À COMPLÉTER =~.
-        return 0.0
+        return self.nbDocsParClasse[C] / sum(self.nbDocsParClasse.values())
 
     def probMotEtantDonneClasse(self, C, W, delta):
-        #TODO: .~= À COMPLÉTER =~.
-        return 0.0
+        return (delta + self.freqWC[(W, C)]) / ((delta * (len(self.vocabulaire) + 1)) + self.nbDocsParClasse[C])
 
     def __call__(self, C, W=None, delta=None):
         if W is None:
@@ -64,7 +63,23 @@ class Probabilite():
 # retour: Un 'set' contenant l'ensemble des mots ('str') du vocabulaire.
 #
 def creerVocabulaire(documents, seuil):
-    #TODO: .~= À COMPLÉTER =~.
+
+    # d = defaultdict(int)
+
+    # for document in documents:
+    #     for word in document:
+    #         d[word] += 1
+
+    # voc_words = set()
+
+    # for key, value in d.items():
+    #     if value >= seuil:
+    #         voc_words.add(key)
+
+    # print(voc_words)
+
+    # return voc_words
+
     return set()
 
 
