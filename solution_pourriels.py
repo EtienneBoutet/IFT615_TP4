@@ -64,23 +64,20 @@ class Probabilite():
 #
 def creerVocabulaire(documents, seuil):
 
-    # d = defaultdict(int)
+    d = defaultdict(int)
 
-    # for document in documents:
-    #     for word in document:
-    #         d[word] += 1
+    for document in documents:
+        for word in document.split():
+            d[word] += 1
 
-    # voc_words = set()
+    voc_words = set()
 
-    # for key, value in d.items():
-    #     if value >= seuil:
-    #         voc_words.add(key)
+    for key, value in d.items():
+        if value >= seuil:
+            voc_words.add(key)
 
-    # print(voc_words)
+    return voc_words
 
-    # return voc_words
-
-    return set()
 
 
 # pretraiter: Fonction qui remplace les mots qui ne font pas parti du vocabulaire
